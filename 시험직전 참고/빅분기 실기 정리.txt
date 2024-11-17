@@ -1,0 +1,56 @@
+x.head().info().describe()
+
+index 초기화
+x.reset_index(drop=True)
+
+중앙값보다 큰 값의 데이터 수
+m = df.loc["2022년"].median()
+print(sum(df.loc["2022년",:] > m))
+
+결측치 행 제거
+df = df[~df['f1'].isnull()]
+
+3사분위 값
+df['f1'].quantile(.75)
+위아래 이상치값 
+df[(df['age']>mean+1.5*std)|(df['age']<mean-1.5*std)]['age'].sum()
+
+
+Min-Max Scale로 변환 
+from sklearn.preprocessing import MinMaxScaler
+mm=MinMaxScaler()
+pd.DataFrame(mm.fit_transform(df))
+
+분류
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.linear_model import LogisticRegression
+predict=model.predict_proba(test)
+pd.DataFrame(pred_test[:,1], columns=['predict'])
+
+회귀
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LinearRegression
+model=LinearRegression()
+model.fit(x_scaled,y)
+predict=model.predict(test)
+
+결측치 내림차순
+print(a.isnull().sum().sort_values('f5',ascending=False).index[0])
+
+데이터 대체(행열 순서 주의)
+df['f5'][:10]=min
+
+특정 조건에서의 열 평균값
+mean=df[df['age']>=80]['f5'].mean()
+
+총합
+df['x1'].sum()
+sum(df['x1'])
+
+갯수
+sum(df.loc["2022년",:] > m)
+
+반올림
+round(number,1)
+
+final=pd.concat([test.iloc[:,0],predict_proba],axis=1)
